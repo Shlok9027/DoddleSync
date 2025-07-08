@@ -36,7 +36,7 @@ const ShopContextProvider = (props) => {
 
  // frontend/src/context/ShopContext.jsx
 useEffect(() => {
-  const newSocket = io(https://doddlesync-baackend.onrender.com, {
+  const newSocket = io("https://doddlesync-baackend.onrender.com", {
     reconnection: true,
     reconnectionAttempts: 5,
     reconnectionDelay: 1000,
@@ -59,7 +59,7 @@ useEffect(() => {
     if (!token) return;
 
     try {
-      const response = await fetch(`${https://doddlesync-baackend.onrender.com}/api/user/me`, {
+      const response = await fetch(`${"https://doddlesync-baackend.onrender.com"}/api/user/me`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
