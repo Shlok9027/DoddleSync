@@ -15,7 +15,7 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const url = import.meta.env.VITE_BACKEND_URL;
+    const url = https://doddlesync-baackend.onrender.com;
 
     try {
       let response;
