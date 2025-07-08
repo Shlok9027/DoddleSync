@@ -37,7 +37,7 @@ export const Verify = () => {
       }
 
       const response = await axios.post(
-        `${import.meta.env.VITE_BACKEND_URL}/api/order/verify`,
+        `${https://doddlesync-baackend.onrender.com}/api/order/verify`,
         { success, orderId, stripeSessionId },
         { headers: { Authorization: `Bearer ${token}` } }
       );
