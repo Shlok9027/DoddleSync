@@ -2,7 +2,7 @@ import axios from "axios";
 import { toast } from "react-toastify";
 
 const api = axios.create({
-  baseURL: https://doddlesync-baackend.onrender.com,
+  baseURL: "https://doddlesync-baackend.onrender.com",
   withCredentials: true,
 });
 
