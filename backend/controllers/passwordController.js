@@ -17,7 +17,7 @@ export const forgotPassword = async (req, res) => {
     user.resetPasswordExpires = Date.now() + 3600000; // 1 hour
     await user.save();
 
-    const resetLink = `${process.env.CLIENT_URL}/reset-password/${token}`;
+    const resetLink = `${"https://doddle-sync.onrender.com"}/reset-password/${token}`;
     console.log("🔗 Reset link:", resetLink);
 
     const transporter = nodemailer.createTransport({
