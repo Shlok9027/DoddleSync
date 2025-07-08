@@ -13,7 +13,7 @@ const Price = () => {
     const fetchPackages = async () => {
       try {
         const response = await fetch(
-          `${import.meta.env.VITE_BACKEND_URL}/api/package/list`
+          `${"https://doddlesync-baackend.onrender.com"}/api/package/list`
         );
         const data = await response.json();
         if (data.success) {
