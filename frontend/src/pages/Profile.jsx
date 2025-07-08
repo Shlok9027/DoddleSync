@@ -108,7 +108,7 @@ const Profile = () => {
   useEffect(() => {
     const fetchUser = async () => {
       try {
-        const res = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/user/me`, { // Use VITE_BACKEND_URL
+        const res = await axios.get(`${https://doddlesync-baackend.onrender.com}/api/user/me`, { // Use VITE_BACKEND_URL
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
           },
@@ -131,7 +131,7 @@ const Profile = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.put(`${import.meta.env.VITE_BACKEND_URL}/api/user/profile`, profile, { // Use VITE_BACKEND_URL
+      const res = await axios.put(`${https://doddlesync-baackend.onrender.com}/api/user/profile`, profile, { // Use VITE_BACKEND_URL
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
