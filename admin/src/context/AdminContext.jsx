@@ -22,7 +22,7 @@ const AdminContextProvider = (props) => {
 
   // Initialize socket connection
   useEffect(() => {
-    const newSocket = io(import.meta.env.VITE_BACKEND_URL || "http://localhost:4000", {
+    const newSocket = io("https://doddlesync-baackend.onrender.com", {
       withCredentials: true,
     });
 
