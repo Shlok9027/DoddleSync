@@ -15,7 +15,7 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const url = https://doddlesync-baackend.onrender.com;
+    const url = "https://doddlesync-baackend.onrender.com";
 
     try {
       let response;
