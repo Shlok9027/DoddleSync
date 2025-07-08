@@ -33,7 +33,7 @@ const FinalPayment = () => {
             // 2. Submit Inquiry (NEW LOCATION!)
             // We submit the inquiry here because this is the point of commitment.
             // The backend's duplicate check will prevent identical inquiries if this is called multiple times.
-            const inquiryResponse = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/inquiry/new`, {
+            const inquiryResponse = await fetch(`${https://doddlesync-baackend.onrender.com}/api/inquiry/new`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
