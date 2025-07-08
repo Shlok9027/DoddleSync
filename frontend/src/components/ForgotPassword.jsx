@@ -1,51 +1,4 @@
-// import React, { useState } from "react";
-// import axios from "axios";
-// import { toast } from "react-toastify";
 
-// const ForgotPassword = () => {
-//   const [email, setEmail] = useState("");
-
-//   const handleSubmit = async (e) => {
-//     e.preventDefault();
-//     try {
-//       const url = import.meta.env.VITE_BACKEND_URL;
-//       await axios.post(`${url}/api/user/forgot-password`, { email });
-//       toast.success("Reset link sent to your email");
-//     } catch (error) {
-//       console.error("Forgot Password Error:", error); // 👈 log to debug
-
-//       // Properly show error message from server, or fallback
-//       const message =
-//         error?.response?.data?.message ||
-//         error.message ||
-//         "Something went wrong";
-//       toast.error(message);
-//     }
-//   };
-
-//   return (
-//     <form
-//       onSubmit={handleSubmit}
-//       className="flex flex-col gap-4 w-full max-w-md mx-auto p-6 bg-white rounded-lg shadow-md mt-20"
-//     >
-//       <input
-//         type="email"
-//         placeholder="Enter your Email"
-//         onChange={(e) => setEmail(e.target.value)}
-//         className="border p-3 rounded"
-//         required
-//       />
-//       <button
-//         type="submit"
-//         className="bg-purple-600 text-white py-2 rounded hover:bg-purple-700"
-//       >
-//         Send Reset Link
-//       </button>
-//     </form>
-//   );
-// };
-
-// export default ForgotPassword;
 
 import React, { useState } from "react";
 import axios from "axios";
@@ -59,7 +12,7 @@ const ForgotPassword = () => {
     e.preventDefault();
     setLoading(true); // Set loading to true when submission starts
     try {
-      const url = import.meta.env.VITE_BACKEND_URL; // Ensure this env variable is correctly set
+      const url = "https://doddlesync-baackend.onrender.com"; // Ensure this env variable is correctly set
       await axios.post(`${url}/api/user/forgot-password`, { email });
       toast.success("🚀 Reset link sent to your email!");
       setEmail(""); // Clear email field on success
