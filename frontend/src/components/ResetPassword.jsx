@@ -1,52 +1,3 @@
-// import React, { useState } from "react";
-// import { useParams } from "react-router-dom";
-// import axios from "axios";
-// import { toast } from "react-toastify";
-
-// const ResetPassword = () => {
-//   const [password, setPassword] = useState("");
-//   const { token } = useParams();
-
-// const handleSubmit = async (e) => {
-//   e.preventDefault();
-//   try {
-//     const url = import.meta.env.VITE_BACKEND_URL;
-//     await axios.post(`${url}/api/user/reset-password/${token}`, { password });
-//     toast.success('Password reset successfully');
-//   } catch (error) {
-//     console.error("Reset Password Error:", error);
-
-//     const message =
-//       error?.response?.data?.message || error.message || "Something went wrong";
-//     toast.error(message);
-//   }
-// };
-
-
-//   return (
-//     <form
-//       onSubmit={handleSubmit}
-//       className="flex flex-col gap-4 w-full max-w-md mx-auto p-6 bg-white rounded-lg shadow-md mt-20"
-//     >
-//       <input
-//         type="password"
-//         placeholder="Write new password"
-//         onChange={(e) => setPassword(e.target.value)}
-//         className="border p-3 rounded"
-//         required
-//       />
-//       <button
-//         type="submit"
-//         className="bg-purple-600 text-white py-2 rounded hover:bg-purple-700"
-//       >
-//         Reset Password
-//       </button>
-//     </form>
-//   );
-// };
-
-// export default ResetPassword;
-
 
 import React, { useState } from "react";
 import { useParams, useNavigate } from "react-router-dom"; // Import useNavigate for redirection
@@ -71,7 +22,7 @@ const ResetPassword = () => {
 
     setLoading(true); // Set loading to true
     try {
-      const url = import.meta.env.VITE_BACKEND_URL; // Ensure this env variable is correctly set
+      const url = "https://doddlesync-baackend.onrender.com; // Ensure this env variable is correctly set
       await axios.post(`${url}/api/user/reset-password/${token}`, { password });
       toast.success('✅ Password reset successfully! You can now log in with your new password.');
       setPassword(""); // Clear fields on success
