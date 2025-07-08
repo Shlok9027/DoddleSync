@@ -20,7 +20,7 @@ const ChatWithClient = () => {
 
   const fetchProjectStatus = async () => {
     try {
-      const res = await fetch(`${https://doddlesync-baackend.onrender.com}/api/project/status`, {
+      const res = await fetch(`${"https://doddlesync-baackend.onrender.com"}/api/project/status`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       const data = await res.json();
@@ -52,7 +52,7 @@ const ChatWithClient = () => {
     const fetchMessages = async () => {
       try {
         const res = await fetch(
-          `${https://doddlesync-baackend.onrender.com}/api/chat/message/${projectDetails.chatId}`,
+          `${"https://doddlesync-baackend.onrender.com"}/api/chat/message/${projectDetails.chatId}`,
           { headers: { Authorization: `Bearer ${token}` } }
         );
         const data = await res.json();
@@ -102,7 +102,7 @@ const ChatWithClient = () => {
     };
 
     try {
-      const res = await fetch(`${https://doddlesync-baackend.onrender.com}/api/chat/send`, {
+      const res = await fetch(`${"https://doddlesync-baackend.onrender.com"}/api/chat/send`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
