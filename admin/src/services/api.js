@@ -5,7 +5,7 @@ import { toast } from "react-toastify";
 
 // ✅ Create custom Axios instance with baseURL
 const api = axios.create({
-  baseURL: import.meta.env.VITE_BACKEND_URL || "http://localhost:4000",
+  baseURL: "https://doddlesync-baackend.onrender.com",
   withCredentials: true,
 });
 
