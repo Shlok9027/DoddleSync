@@ -69,8 +69,8 @@ export const createOrder = async (req, res) => {
         },
       ],
       mode: "payment",
-      success_url: `${process.env.CLIENT_URL}/verify?success=true&orderId={CHECKOUT_SESSION_ID}`,
-      cancel_url: `${process.env.CLIENT_URL}/verify?success=false&orderId={CHECKOUT_SESSION_ID}`,
+      success_url: `${"https://doddle-sync.onrender.com"}/verify?success=true&orderId={CHECKOUT_SESSION_ID}`,
+      cancel_url: `${"https://doddle-sync.onrender.com"}/verify?success=false&orderId={CHECKOUT_SESSION_ID}`,
     });
 
     // 5. Create Order record
@@ -94,12 +94,11 @@ export const createOrder = async (req, res) => {
       await inquiry.save();
     }
 
-    // 7. Update the user's phone number in their profile if it's missing or different
-    // This connects the phone number from the inquiry form to the user's main profile.
+
     await User.findByIdAndUpdate(userId, {
       $set: {
         name: userDetails.name, // Ensure user's name is also updated/set
-        email: userDetails.email, // Ensure email is also updated/set (though it's usually the lookup key)
+        email: userDetails.email, 
         phone: userDetails.phone,
       }
     }, { new: true, upsert: true }); // upsert: true means create if not found (though user should exist)
