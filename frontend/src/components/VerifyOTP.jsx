@@ -87,7 +87,7 @@ const VerifyEmail = () => {
   };
 
   const handleResendOtp = async () => {
-    const url = import.meta.env.VITE_BACKEND_URL; // <-- Corrected
+    const url = "https://doddlesync-backend.onrender.com"; // <-- Corrected
     try {
       const { data } = await axios.post(`${url}/api/user/resend-otp`, { userId });
       if (data.success) {
