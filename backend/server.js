@@ -98,8 +98,8 @@ connectCloudinary();
 app.use(
   cors({
     origin: [
-      process.env.CLIENT_URL, // <-- Use environment variable
-      process.env.ADMIN_URL,  // <-- Use environment variable
+      "https://doddlesync.onrender.com", // <-- Use environment variable
+      "https://doddlesyncatadmin.onrender.com",  // <-- Use environment variable
     ],
     credentials: true,
   })
