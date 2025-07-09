@@ -5,15 +5,16 @@ import { ShopContext } from "../context/ShopContext";
 import { toast } from "react-toastify";
 
 const Price = () => {
-  const { selectPackage, currency, token } = useContext(ShopContext);
+  // Destructure BACKEND_URL from ShopContext
+  const { selectPackage, currency, token, BACKEND_URL } = useContext(ShopContext);
   const navigate = useNavigate();
-  const [packages, setPackages] = useState([]); 
+  const [packages, setPackages] = useState([]);
 
   useEffect(() => {
     const fetchPackages = async () => {
       try {
         const response = await fetch(
-          `${import.meta.env.VITE_BACKEND_URL}/api/package/list`
+          `${BACKEND_URL}/api/package/list` // <-- Changed to use BACKEND_URL from context
         );
         const data = await response.json();
         if (data.success) {
@@ -27,7 +28,7 @@ const Price = () => {
       }
     };
     fetchPackages();
-  }, []);
+  }, [BACKEND_URL]); // <-- Added BACKEND_URL to dependencies
 
   const handlePackageSelect = (pkg) => {
     if (!token) {
@@ -39,10 +40,10 @@ const Price = () => {
 
   return (
     <div className="relative py-28 px-4 sm:px-12 md:px-20 overflow-hidden rounded-[3rem] shadow-2xl">
-      {/* Background Blobs */}{" "}
-      <div className="absolute top-0 left-0 w-[30rem] h-[30rem] bg-pink-400 rounded-full blur-[150px] opacity-60 animate-blob z-0" />{" "}
-      <div className="absolute top-40 right-0 w-[30rem] h-[30rem] bg-yellow-400 rounded-full blur-[150px] opacity-60 animate-blob animation-delay-2000 z-0" />{" "}
-      <div className="absolute bottom-0 left-[15%] w-[30rem] h-[30rem] bg-purple-500 rounded-full blur-[150px] opacity-60 animate-blob animation-delay-4000 z-0" />{" "}
+      {/* Background Blobs */}
+      <div className="absolute top-0 left-0 w-[30rem] h-[30rem] bg-pink-400 rounded-full blur-[150px] opacity-60 animate-blob z-0" />
+      <div className="absolute top-40 right-0 w-[30rem] h-[30rem] bg-yellow-400 rounded-full blur-[150px] opacity-60 animate-blob animation-delay-2000 z-0" />
+      <div className="absolute bottom-0 left-[15%] w-[30rem] h-[30rem] bg-purple-500 rounded-full blur-[150px] opacity-60 animate-blob animation-delay-4000 z-0" />
       <div className="relative z-10 max-w-7xl mx-auto text-center">
         {" "}
         <div className="mb-24 font-[brillant] space-y-6">
@@ -63,7 +64,7 @@ const Price = () => {
             tailored to your journey.{" "}
           </p>{" "}
         </div>
-        {/* Pricing Cards */}{" "}
+        {/* Pricing Cards */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
           {" "}
           {packages.map((pkg) => (
@@ -77,7 +78,7 @@ const Price = () => {
                 }
               `}
             >
-              {/* Conditional Border Glow */}{" "}
+              {/* Conditional Border Glow */}
               <div
                 className={`absolute inset-0 rounded-[2rem] border-2 transition-opacity duration-500 animate-glow-pulse z-0
                 ${
@@ -91,8 +92,8 @@ const Price = () => {
                 {" "}
                 <h3
                   className={`text-3xl font-bold capitalize mb-1
-                  ${pkg.isCustom ? "text-yellow-300" : "text-purple-200"}
-                `}
+                    ${pkg.isCustom ? "text-yellow-300" : "text-purple-200"}
+                  `}
                 >
                   {pkg.name} Plan{" "}
                 </h3>{" "}

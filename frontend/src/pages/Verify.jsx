@@ -14,6 +14,7 @@ export const Verify = () => {
     token,
     saveUserDetails,
     setSelectedPackage,
+    BACKEND_URL, // <-- Added to retrieve from context
   } = useContext(ShopContext);
 
   const [searchParams] = useSearchParams();
@@ -37,7 +38,7 @@ export const Verify = () => {
       }
 
       const response = await axios.post(
-        `${import.meta.env.VITE_BACKEND_URL}/api/order/verify`,
+        `${BACKEND_URL}/api/order/verify`, // <-- Changed to use BACKEND_URL from context
         { success, orderId, stripeSessionId },
         { headers: { Authorization: `Bearer ${token}` } }
       );
@@ -81,7 +82,14 @@ export const Verify = () => {
     if (token && stripeSessionId) {
       verifyPayment();
     }
-  }, [token, stripeSessionId]);
+  }, [
+    token,
+    stripeSessionId,
+    BACKEND_URL,
+    navigate,
+    saveUserDetails,
+    setSelectedPackage,
+  ]); // Added BACKEND_URL, navigate, saveUserDetails, setSelectedPackage to dependencies
 
   return (
     <div className="min-h-screen flex items-center justify-center relative overflow-hidden">

@@ -1,13 +1,14 @@
 import React, { useContext, useState } from "react";
-import { assets } from "../assets/assets.js";
 import { Link, NavLink, useLocation } from "react-router-dom"; // Keep NavLink for direct routes
 import { ShopContext } from "../context/ShopContext.jsx";
 import { toast } from "react-toastify";
 import { scroller } from "react-scroll";
+import { assets } from "../assets/assets.js"; // Make sure assets is imported
 
 const NavBar = () => {
   const [visible, setVisible] = useState(false);
-  const { navigate, token, logout } = useContext(ShopContext);
+  // Destructure BACKEND_URL from ShopContext
+  const { navigate, token, logout, BACKEND_URL } = useContext(ShopContext);
   const location = useLocation();
 
   const handleProfileClick = async () => {
@@ -18,7 +19,7 @@ const NavBar = () => {
 
     try {
       const res = await fetch(
-        `${import.meta.env.VITE_BACKEND_URL}/api/user/me`,
+        `${BACKEND_URL}/api/user/me`, // <-- Changed to use BACKEND_URL from context
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,

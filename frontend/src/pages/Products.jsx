@@ -3,17 +3,13 @@ import { assets, services } from "../assets/assets"; // Ensure assets and servic
 
 const Product = () => {
   const [activeIndex, setActiveIndex] = useState(null);
-  const orbRefs = useRef([]); // To reference individual orbs for dynamic effects
+  const orbRefs = useRef([]); 
 
-  // Function to handle click for mobile view and also desktop hover activation for details
   const handleItemInteraction = (index) => {
     setActiveIndex(activeIndex === index ? null : index);
-    // Potentially add a subtle pulse animation on click/hover activation
   };
 
-  // Optional: Add a 'magnetic' or follow-cursor effect to orbs on desktop
-  // This would require more complex JS and potentially a separate hook or library
-  // For simplicity, we'll focus on CSS for now.
+
 
   return (
     <div

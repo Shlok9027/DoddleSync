@@ -21,8 +21,6 @@ const Connect = () => {
 
     useEffect(() => {
         if (!token) {
-            // If no token, redirect to login. Ensure it's not an infinite loop.
-            // Using a timeout to prevent potential render issues on fast redirects.
             const redirectTimer = setTimeout(() => {
                 navigate("/login", { state: { from: "/connect" } });
             }, 0);
@@ -44,7 +42,6 @@ const Connect = () => {
         setForm((prev) => ({ ...prev, [name]: value }));
     };
 
-    // --- MAJOR CHANGE HERE: REMOVED INQUIRY API CALL ---
     const handleSubmit = async (e) => {
         e.preventDefault();
         // Frontend validation
@@ -60,17 +57,12 @@ const Connect = () => {
             return;
         }
 
-        // Disable button to prevent double clicks
         setIsSubmitting(true);
         try {
-            // Save user details to context (and localStorage via saveUserDetails)
-            // This data will be picked up by the FinalPayment component
             saveUserDetails(form);
             toast.success("Details saved! Proceeding to payment summary.");
             navigate("/final-payment");
         } catch (err) {
-            // This catch block might not be strictly necessary if no async operation is here,
-            // but it's good practice for future additions.
             console.error("Error saving form data:", err);
             toast.error("Failed to save details. Please try again.");
         } finally {

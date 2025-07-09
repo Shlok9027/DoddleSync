@@ -3,7 +3,7 @@ import { assets } from "../assets/assets";
 import { ShopContext } from "../context/ShopContext";
 
 const ChatWithClient = () => {
-  const { socket, token } = useContext(ShopContext);
+  const { socket, token, BACKEND_URL } = useContext(ShopContext);
   const chatContainerRef = useRef(null);
 
   const [isAccepted, setIsAccepted] = useState(false);
@@ -20,7 +20,7 @@ const ChatWithClient = () => {
 
   const fetchProjectStatus = async () => {
     try {
-      const res = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/project/status`, {
+      const res = await fetch(`${BACKEND_URL}/api/project/status`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       const data = await res.json();
@@ -52,7 +52,7 @@ const ChatWithClient = () => {
     const fetchMessages = async () => {
       try {
         const res = await fetch(
-          `${import.meta.env.VITE_BACKEND_URL}/api/chat/message/${projectDetails.chatId}`,
+          `${BACKEND_URL}/api/chat/message/${projectDetails.chatId}`,
           { headers: { Authorization: `Bearer ${token}` } }
         );
         const data = await res.json();
@@ -102,7 +102,7 @@ const ChatWithClient = () => {
     };
 
     try {
-      const res = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/chat/send`, {
+      const res = await fetch(`${BACKEND_URL}/api/chat/send`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

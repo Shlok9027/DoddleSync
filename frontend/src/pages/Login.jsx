@@ -11,17 +11,16 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const navigate = useNavigate();
   const location = useLocation();
-  const { login } = useContext(ShopContext);
+  const { login, BACKEND_URL } = useContext(ShopContext);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const url = import.meta.env.VITE_BACKEND_URL;
 
     try {
       let response;
 
       if (currState === "Login") {
-        response = await axios.post(`${url}/api/user/login`, { email, password });
+        response = await axios.post(`${BACKEND_URL}/api/user/login`, { email, password });
 
         if (response.data.success) {
           login(response.data.token);
@@ -36,7 +35,7 @@ const Login = () => {
 
       } else {
         // Sign Up: register and redirect to OTP
-        response = await axios.post(`${url}/api/user/register`, {
+        response = await axios.post(`${BACKEND_URL}/api/user/register`, {
           name,
           email,
           password,

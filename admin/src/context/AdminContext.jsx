@@ -1,6 +1,3 @@
-
-
-
 /// admin/src/context/AdminContext.jsx
 import React, { createContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -14,6 +11,9 @@ const AdminContextProvider = (props) => {
   const navigate = useNavigate();
   const currency = "₹";
 
+  // Correctly use import.meta.env for Vite environment variables
+  const BACKEND_URL = import.meta.env.VITE_BACKEND_URL; // <-- Corrected
+
   const [socket, setSocket] = useState(null);
   const [clients, setClients] = useState([]);
   const [selectedClient, setSelectedClient] = useState(null);
@@ -22,7 +22,13 @@ const AdminContextProvider = (props) => {
 
   // Initialize socket connection
   useEffect(() => {
-    const newSocket = io(import.meta.env.VITE_BACKEND_URL || "http://localhost:4000", {
+    // Ensure BACKEND_URL is available before trying to connect
+    if (!BACKEND_URL) {
+      console.error("BACKEND_URL is not defined. Cannot establish socket connection for admin.");
+      return;
+    }
+
+    const newSocket = io(BACKEND_URL, { // <-- Use BACKEND_URL
       withCredentials: true,
     });
 
@@ -37,7 +43,7 @@ const AdminContextProvider = (props) => {
     setSocket(newSocket);
 
     return () => newSocket.close();
-  }, []);
+  }, [BACKEND_URL]); // <-- Added BACKEND_URL to dependencies
 
   // Validate token on mount
   useEffect(() => {
@@ -94,6 +100,7 @@ const AdminContextProvider = (props) => {
     logout,
     messages,
     setMessages,
+    BACKEND_URL, // Provided in context
   };
 
   return <AdminContext.Provider value={value}>{props.children}</AdminContext.Provider>;

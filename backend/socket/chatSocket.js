@@ -4,8 +4,8 @@ export default function initSocket(server) {
   const io = new Server(server, {
     cors: {
       origin: [
-        process.env.CLIENT_URL || "http://localhost:5173",
-        process.env.ADMIN_URL || "http://localhost:5174",
+        "https://doddle-sync.onrender.com",
+        "https://doddlesyncatadmin.onrender.com",
       ],
       methods: ["GET", "POST"],
       credentials: true,

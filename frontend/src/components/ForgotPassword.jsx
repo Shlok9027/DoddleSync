@@ -10,7 +10,7 @@ const ForgotPassword = () => {
     e.preventDefault();
     setLoading(true);
     try {
-      const url = import.meta.env.VITE_BACKEND_URL;
+      const url = import.meta.env.VITE_BACKEND_URL; // <-- Corrected
       await axios.post(`${url}/api/user/forgot-password`, { email });
       toast.success("🚀 Reset link sent to your email!");
       setEmail("");
@@ -30,7 +30,7 @@ const ForgotPassword = () => {
       <form
         onSubmit={handleSubmit}
         className="relative w-full max-w-[420px] sm:max-w-[500px] bg-gradient-to-br from-gray-900 to-gray-800 p-6 sm:p-8 rounded-2xl border border-purple-700/50 shadow-xl
-        transform transition duration-300 hover:scale-[1.01] hover:shadow-purple-500/30"
+         transform transition duration-300 hover:scale-[1.01] hover:shadow-purple-500/30"
       >
         {/* Floating Header Badge */}
         <div className="absolute -top-5 left-1/2 transform -translate-x-1/2 px-6 py-2 rounded-full bg-gradient-to-r from-purple-600 to-indigo-500 text-white font-bold text-base sm:text-lg shadow-md">
@@ -39,15 +39,17 @@ const ForgotPassword = () => {
 
         {/* Email Input */}
         <div className="mb-6 mt-2">
-          <label className="block text-sm font-medium text-gray-300 mb-1">Your Email</label>
+          <label className="block text-sm font-medium text-gray-300 mb-1">
+            Your Email
+          </label>
           <input
             type="email"
             placeholder="Enter your email address"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             className="w-full px-4 py-3 border border-purple-500/60 bg-gray-700 text-white placeholder-gray-400 rounded-lg text-base
-                       focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:border-indigo-400 transition duration-300
-                       hover:border-purple-400"
+                         focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:border-indigo-400 transition duration-300
+                         hover:border-purple-400"
             required
             disabled={loading}
           />

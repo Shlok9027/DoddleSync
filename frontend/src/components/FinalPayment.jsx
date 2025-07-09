@@ -10,7 +10,8 @@ const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY);
 
 const FinalPayment = () => {
     const navigate = useNavigate();
-    const { userDetails, selectedPackage, currency, token } = useContext(ShopContext);
+    // Destructure BACKEND_URL from ShopContext
+    const { userDetails, selectedPackage, currency, token, BACKEND_URL } = useContext(ShopContext);
     const [paymentMethod, setPaymentMethod] = useState("stripe");
     const [isProcessing, setIsProcessing] = useState(false);
 
@@ -30,10 +31,8 @@ const FinalPayment = () => {
                 userDetails: userDetails,
             };
 
-            // 2. Submit Inquiry (NEW LOCATION!)
-            // We submit the inquiry here because this is the point of commitment.
-            // The backend's duplicate check will prevent identical inquiries if this is called multiple times.
-            const inquiryResponse = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/inquiry/new`, {
+            // 2. Submit Inquiry (this was hardcoded before, now uses BACKEND_URL)
+            const inquiryResponse = await fetch(`${BACKEND_URL}/api/inquiry/new`, { // <-- Changed
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -54,10 +53,7 @@ const FinalPayment = () => {
 
             const inquiryData = await inquiryResponse.json();
 
-            if (!inquiryResponse.ok) { // Check for non-2xx status codes
-                // If inquiry submission fails (e.g., duplicate detected by backend)
-                // You can still choose to proceed with payment if you want,
-                // or stop here with an error. For now, we'll stop.
+            if (!inquiryResponse.ok) {
                 throw new Error(inquiryData.message || "Failed to submit inquiry before payment.");
             }
             toast.success(inquiryData.message || "Inquiry recorded, redirecting to payment...");

@@ -3,32 +3,6 @@ import Slider from "react-slick"; // Import Slider component
 import { assets } from "../assets/assets"; // Assuming assets contains your project images
 import { CSSTransition, TransitionGroup } from 'react-transition-group'; // For text animation
 
-// You'll need to install react-transition-group if you haven't already:
-// npm install react-transition-group
-// yarn add react-transition-group
-
-// Add this CSS to your index.css or global stylesheet for fade animation
-/*
-.fade-enter {
-  opacity: 0.01;
-  transform: translateY(10px);
-}
-.fade-enter-active {
-  opacity: 1;
-  transform: translateY(0);
-  transition: opacity 300ms ease-in, transform 300ms ease-in;
-}
-.fade-exit {
-  opacity: 1;
-  transform: translateY(0);
-}
-.fade-exit-active {
-  opacity: 0.01;
-  transform: translateY(-10px);
-  transition: opacity 300ms ease-out, transform 300ms ease-out;
-}
-*/
-
 
 const OurProjects = () => {
   // Array of your project data

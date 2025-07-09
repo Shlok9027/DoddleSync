@@ -17,7 +17,8 @@ export const forgotPassword = async (req, res) => {
     user.resetPasswordExpires = Date.now() + 3600000; // 1 hour
     await user.save();
 
-    const resetLink = `${process.env.CLIENT_URL}/reset-password/${token}`;
+    // Use process.env.CLIENT_URL to construct the reset link
+    const resetLink = `${process.env.CLIENT_URL}/reset-password/${token}`; // <-- Corrected
     console.log("🔗 Reset link:", resetLink);
 
     const transporter = nodemailer.createTransport({

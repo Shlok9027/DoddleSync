@@ -21,7 +21,7 @@
 // // App and HTTP server
 // const app = express();
 // const httpServer = createServer(app);
- 
+  
 // // Connect to DB and Cloudinary
 // connectDB();
 // connectCloudinary();
@@ -30,8 +30,8 @@
 // app.use(
 //   cors({
 //     origin: [
-//       process.env.CLIENT_URL || "http://localhost:5173",
-//       process.env.ADMIN_URL || "http://localhost:5174",
+//       process.env.CLIENT_URL, // <-- Use environment variable
+//       process.env.ADMIN_URL,  // <-- Use environment variable
 //     ],
 //     credentials: true,
 //   })
@@ -59,10 +59,11 @@
 // app.use(errorHandler);
 
 // // Start server
-// const PORT = process.env.PORT || 4000;
-// httpServer.listen(PORT, () => {
+// const PORT = process.env.PORT || 4000; // <-- Ensure PORT is correctly handled
+// httpServer.listen(PORT,  () => {
 //   console.log(`🚀 Server running on port ${PORT}`);
 // });
+
 
 
 import express from "express";
@@ -97,8 +98,8 @@ connectCloudinary();
 app.use(
   cors({
     origin: [
-      process.env.CLIENT_URL || "http://localhost:5173",
-      process.env.ADMIN_URL || "http://localhost:5174",
+      process.env.CLIENT_URL, // <-- Use environment variable
+      process.env.ADMIN_URL,  // <-- Use environment variable
     ],
     credentials: true,
   })
@@ -126,7 +127,7 @@ app.get("/", (req, res) => {
 app.use(errorHandler);
 
 // Start server
-const PORT = process.env.PORT || 4000;
+const PORT = process.env.PORT || 4000; // <-- Ensure PORT is correctly handled
 httpServer.listen(PORT,  () => {
   console.log(`🚀 Server running on port ${PORT}`);
 });

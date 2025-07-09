@@ -3,9 +3,10 @@
 import axios from "axios";
 import { toast } from "react-toastify";
 
+
 // ✅ Create custom Axios instance with baseURL
 const api = axios.create({
-  baseURL: import.meta.env.VITE_BACKEND_URL || "http://localhost:4000",
+  baseURL: import.meta.env.VITE_BACKEND_URL, // <-- Corrected
   withCredentials: true,
 });
 
@@ -87,7 +88,7 @@ export const adminApi = {
   // 💌 Get messages of a chat thread
   getMessages: async (chatId) => api.get(`/api/chat/message/${chatId}/admin`),
   // 📤 Send message
- sendMessage: async (messageData) => {
-  return api.post("/api/chat/send/admin", messageData); // ✅ Admin route
-}
+  sendMessage: async (messageData) => {
+    return api.post("/api/chat/send/admin", messageData); // ✅ Admin route
+  }
 };

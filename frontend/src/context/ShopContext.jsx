@@ -1,5 +1,3 @@
-
-
 import React, { createContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -10,7 +8,10 @@ export const ShopContext = createContext();
 
 const ShopContextProvider = (props) => {
   const navigate = useNavigate();
-  const currency = "₹" ;
+  const currency = "₹";
+
+  // Correctly use import.meta.env for Vite environment variables
+  const BACKEND_URL = import.meta.env.VITE_BACKEND_URL; // <-- Corrected
 
   const [socket, setSocket] = useState(null);
   const [messages, setMessages] = useState([]);
@@ -34,62 +35,68 @@ const ShopContextProvider = (props) => {
     }
   );
 
- // frontend/src/context/ShopContext.jsx
-useEffect(() => {
-  const newSocket = io(import.meta.env.VITE_BACKEND_URL || "http://localhost:4000", {
-    reconnection: true,
-    reconnectionAttempts: 5,
-    reconnectionDelay: 1000,
-  });
-  setSocket(newSocket);
-
-  newSocket.on("connect", () => {
-    console.log("Connected to server");
-  });
-
-  newSocket.on("receive_message", (message) => {
-    setMessages((prev) => [...prev, message]);
-  });
-
-  return () => newSocket.close();
-}, []);
-
-useEffect(() => {
-  const fetchUser = async () => {
-    if (!token) return;
-
-    try {
-      const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/user/me`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-
-      const data = await response.json();
-
-      if (data.success) {
-        setUser(data.user);
-      } else {
-        // Token might be expired or invalid → logout only if user visits a protected page
-        localStorage.removeItem("token");
-        setToken(null);
-        setUser(null);
-      }
-    } catch (error) {
-      console.error("Session check failed:", error.message);
-      // Don't force logout — just let user stay until their next protected action
+  // frontend/src/context/ShopContext.jsx
+  useEffect(() => {
+    // Ensure BACKEND_URL is available before trying to connect
+    if (!BACKEND_URL) {
+      console.error("BACKEND_URL is not defined. Cannot establish socket connection.");
+      return;
     }
+
+    const newSocket = io(BACKEND_URL, { // <-- Use BACKEND_URL
+      reconnection: true,
+      reconnectionAttempts: 5,
+      reconnectionDelay: 1000,
+    });
+    setSocket(newSocket);
+
+    newSocket.on("connect", () => {
+      console.log("Connected to server");
+    });
+
+    newSocket.on("receive_message", (message) => {
+      setMessages((prev) => [...prev, message]);
+    });
+
+    return () => newSocket.close();
+  }, [BACKEND_URL]); // <-- Added BACKEND_URL to dependencies
+
+  useEffect(() => {
+    const fetchUser = async () => {
+      if (!token) return;
+
+      try {
+        const response = await fetch(`${BACKEND_URL}/api/user/me`, { // <-- Use BACKEND_URL
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+
+        const data = await response.json();
+
+        if (data.success) {
+          setUser(data.user);
+        } else {
+          // Token might be expired or invalid → logout only if user visits a protected page
+          localStorage.removeItem("token");
+          setToken(null);
+          setUser(null);
+        }
+      } catch (error) {
+        console.error("Session check failed:", error.message);
+        // Don't force logout — just let user stay until their next protected action
+      }
+    };
+
+    fetchUser();
+  }, [token, BACKEND_URL]); // <-- Added BACKEND_URL to dependencies
+
+  const login = (token) => {
+    localStorage.setItem("token", token); // the key part
+    setToken(token);
+    toast.success("Login successful");
+    navigate("/");
   };
-
-  fetchUser();
-}, []);
-
-const login = (token) => {
-  localStorage.setItem("token", token); // the key part
-  setToken(token);
-  toast.success("Login successful");
-  navigate("/");
-};
 
   const logout = () => {
     localStorage.removeItem("token");
@@ -158,6 +165,7 @@ const login = (token) => {
     user,
     login,
     logout,
+    BACKEND_URL, // Provided in context
   };
 
   return <ShopContext.Provider value={value}>{props.children}</ShopContext.Provider>;

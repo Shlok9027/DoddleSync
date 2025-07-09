@@ -66,7 +66,7 @@ const VerifyEmail = () => {
       return;
     }
 
-    const url = import.meta.env.VITE_BACKEND_URL;
+    const url = import.meta.env.VITE_BACKEND_URL; // <-- Corrected
     try {
       const { data } = await axios.post(`${url}/api/user/verify-otp`, { userId, otp: fullOtp });
       if (data.success) {
@@ -87,7 +87,7 @@ const VerifyEmail = () => {
   };
 
   const handleResendOtp = async () => {
-    const url = import.meta.env.VITE_BACKEND_URL;
+    const url = import.meta.env.VITE_BACKEND_URL; // <-- Corrected
     try {
       const { data } = await axios.post(`${url}/api/user/resend-otp`, { userId });
       if (data.success) {

@@ -22,7 +22,7 @@ const ResetPassword = () => {
 
     setLoading(true); // Set loading to true
     try {
-      const url = import.meta.env.VITE_BACKEND_URL; // Ensure this env variable is correctly set
+      const url = "https://doddlesync-baackend.onrender.com"; // Ensure this env variable is correctly set
       await axios.post(`${url}/api/user/reset-password/${token}`, { password });
       toast.success('✅ Password reset successfully! You can now log in with your new password.');
       setPassword(""); // Clear fields on success
