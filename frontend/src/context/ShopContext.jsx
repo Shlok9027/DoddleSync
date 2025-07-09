@@ -11,7 +11,7 @@ const ShopContextProvider = (props) => {
   const currency = "₹";
 
   // Correctly use import.meta.env for Vite environment variables
-  const BACKEND_URL = import.meta.env.VITE_BACKEND_URL; // <-- Corrected
+  const BACKEND_URL = "https://doddlesync-backend.onrender.com"; // <-- Corrected
 
   const [socket, setSocket] = useState(null);
   const [messages, setMessages] = useState([]);
