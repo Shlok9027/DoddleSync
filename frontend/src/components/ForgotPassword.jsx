@@ -10,7 +10,7 @@ const ForgotPassword = () => {
     e.preventDefault();
     setLoading(true);
     try {
-      const url = import.meta.env.VITE_BACKEND_URL; // <-- Corrected
+      const url = "https://doddlesync-backend.onrender.com"; // <-- Corrected
       await axios.post(`${url}/api/user/forgot-password`, { email });
       toast.success("🚀 Reset link sent to your email!");
       setEmail("");
