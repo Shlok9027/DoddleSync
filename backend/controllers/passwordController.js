@@ -18,7 +18,7 @@ export const forgotPassword = async (req, res) => {
     await user.save();
 
     // Use process.env.CLIENT_URL to construct the reset link
-    const resetLink = `${process.env.CLIENT_URL}/reset-password/${token}`; // <-- Corrected
+    const resetLink = `${"https://doddlesync.onrender.com"}/reset-password/${token}`; // <-- Corrected
     console.log("🔗 Reset link:", resetLink);
 
     const transporter = nodemailer.createTransport({
