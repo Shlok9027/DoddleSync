@@ -38,16 +38,16 @@ const NavBar = () => {
         }
       } else {
         toast.error(
-          data.message || "Failed to fetch user profile. Please log in again."
+          data.message || "Failed to fetch user."
         );
         logout();
       }
     } catch (error) {
       console.error("Error checking profile", error);
       toast.error(
-        "An error occurred while checking your profile. Please try again."
+        "This feature is exclusively available to clients."
       );
-      navigate("/profile");
+      navigate("/");
     }
   };
 
@@ -55,9 +55,7 @@ const NavBar = () => {
     logout();
   };
 
-  // Helper to determine if a hash-based link should be considered 'active'
   const isHashLinkActive = (hashTarget) => {
-    // A hash link is active if we are on the root path AND the hash matches
     return location.pathname === "/" && location.hash === `#${hashTarget}`;
   };
 
@@ -65,17 +63,13 @@ const NavBar = () => {
     setVisible(false); // Close mobile sidebar
 
     if (hashTarget) {
-      // This is a link to a section on the Home page (e.g., 'services', 'packages')
-      // Navigate to the root path with the hash. App.jsx will then scroll.
       navigate(`/#${hashTarget}`);
     } else {
-      // This is a link to a separate direct route (e.g., /products, /login)
       navigate(path);
     }
   };
 
   return (
-    // Fixed positioning and full width for persistent navbar
     <div className="relative top-1 left-0  right-0 w-full z-50 flex items-center justify-between px-4 sm:px-6 py-4 shadow-lg border-gray-200 rounded-xl font-medium transition-all duration-500 ease-in-out bg-transparent backdrop-blur-md">
       <Link to="/" className="flex-shrink-0">
         <div className="absolute top-0 -left-4 w-72 h-72 bg-purple-900 rounded-full mix-blend-overlay filter blur-3xl pointer-events-none opacity-40 animate-blob z-0" />
@@ -107,8 +101,6 @@ const NavBar = () => {
                 : ""
             }`
           }
-          // The onClick ensures that if already on home, but a specific hash isn't set, it jumps to home.
-          // Or if you directly type /#home, it becomes active.
           onClick={(e) => {
             e.preventDefault();
             handleNavLinkClick("/", "home");

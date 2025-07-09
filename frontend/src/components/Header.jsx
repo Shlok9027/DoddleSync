@@ -7,12 +7,10 @@ import { loadSlim } from "tsparticles-slim"; // Import loadSlim
 const Header = () => {
   const { navigate } = useContext(ShopContext);
 
-  // Initialize particles engine for this component
   const particlesInit = async (main) => {
     await loadSlim(main);
   };
 
-  // Callback when particles container is loaded (optional)
   const particlesLoaded = (container) => {
     console.log("Header Particles container loaded", container);
   };
@@ -26,7 +24,6 @@ const Header = () => {
       className="relative w-full my-5 h-[60vh] bg-cover bg-center rounded-3xl bg-no-repeat flex items-center justify-center"
       style={{ backgroundImage: `url(${assets.hero})` }}
     >
-      {/* Particles component for interactive effects */}
       <Particles
         id="header-tsparticles" // Unique ID for this Particles instance
         init={particlesInit}
@@ -39,7 +36,7 @@ const Header = () => {
           },
           fpsLimit: 120,
           fullScreen: {
-            enable: false, // Important: disable full screen so it stays within the Header div
+            enable: false, 
           },
           interactivity: {
             events: {
