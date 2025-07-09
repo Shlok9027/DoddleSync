@@ -68,8 +68,8 @@ export const createOrder = async (req, res) => {
         },
       ],
       mode: "payment",
-      success_url: `${process.env.CLIENT_URL}/verify?success=true&orderId={CHECKOUT_SESSION_ID}`, // <-- Corrected
-      cancel_url: `${process.env.CLIENT_URL}/verify?success=false&orderId={CHECKOUT_SESSION_ID}`,   // <-- Corrected
+      success_url: `${"https://doddlesync.onrender.com"}/verify?success=true&orderId={CHECKOUT_SESSION_ID}`, // <-- Corrected
+      cancel_url: `${"https://doddlesync.onrender.com"}/verify?success=false&orderId={CHECKOUT_SESSION_ID}`,   // <-- Corrected
     });
 
     // 5. Create Order record
