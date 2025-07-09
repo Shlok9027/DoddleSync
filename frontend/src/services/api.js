@@ -2,7 +2,7 @@ import axios from "axios";
 import { toast } from "react-toastify";
 
 const api = axios.create({
-  baseURL: import.meta.env.VITE_BACKEND_URL, // <-- Correctly use Vite's env variable
+  baseURL: "https://doddlesync-backend.onrender.com", // <-- Correctly use Vite's env variable
   withCredentials: true,
 });
 
