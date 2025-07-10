@@ -225,92 +225,104 @@ const NavBar = () => {
       </div>
 
       {/* Mobile Sidebar */}
-      <div
-        className={`fixed top-0 right-0 bottom-0 bg-white/10 backdrop-blur-2xl border-l border-purple-200 shadow-[0_8px_30px_rgba(147,51,234,0.3)] transition-all duration-700 ease-in-out lg:hidden overflow-y-auto ${
-          visible ? "w-4/5 px-6 py-8" : "w-0 px-0 py-0"
-        } rounded-l-3xl z-40`}
+ {/* Mobile Sidebar */}
+<div
+  className={`fixed top-0 right-0 bottom-0 bg-white/10 backdrop-blur-3xl border-l border-purple-200 shadow-[0_8px_40px_rgba(147,51,234,0.3)] transition-all duration-700 ease-in-out lg:hidden overflow-y-auto ${
+    visible ? "w-[85%] px-8 py-10" : "w-0 px-0 py-0"
+  } rounded-l-3xl z-40`}
+>
+  <div className="flex flex-col text-white font-semibold tracking-wide text-xl space-y-6">
+    <div
+      onClick={() => setVisible(false)}
+      className="flex items-center gap-4 cursor-pointer text-purple-200 hover:text-white hover:scale-105 hover:animate-pulse transition-all duration-300"
+    >
+      <img
+        src={assets.dropdown}
+        className="h-5 rotate-180 filter drop-shadow-md"
+        alt="Back"
+      />
+      <p className="text-lg font-bold">Back</p>
+    </div>
+
+    <Link
+      className={`rounded-xl px-5 py-4 border border-white/20 bg-white/5 hover:bg-purple-100/10 hover:text-purple-300 shadow-inner transition-all duration-300 ${
+        isHashLinkActive("home") ||
+        (location.pathname === "/" && location.hash === "")
+          ? "active"
+          : ""
+      }`}
+      to="/"
+      onClick={() => handleNavLinkClick("/", "home")}
+    >
+      HOME
+    </Link>
+
+    <Link
+      className={`rounded-xl px-5 py-4 border border-white/20 bg-white/5 hover:bg-purple-100/10 hover:text-purple-300 shadow-inner transition-all duration-300 ${
+        isHashLinkActive("services") ? "active" : ""
+      }`}
+      to="/#services"
+      onClick={() => handleNavLinkClick("/", "services")}
+    >
+      SERVICES
+    </Link>
+
+    <Link
+      className={`rounded-xl px-5 py-4 border border-white/20 bg-white/5 hover:bg-purple-100/10 hover:text-purple-300 shadow-inner transition-all duration-300 ${
+        isHashLinkActive("packages") ? "active" : ""
+      }`}
+      to="/#packages"
+      onClick={() => handleNavLinkClick("/", "packages")}
+    >
+      PACKAGES
+    </Link>
+
+    <Link
+      className={`rounded-xl px-5 py-4 border border-white/20 bg-white/5 hover:bg-purple-100/10 hover:text-purple-300 shadow-inner transition-all duration-300 ${
+        !token ? "pointer-events-none opacity-50" : ""
+      } ${isHashLinkActive("connect") ? "active" : ""}`}
+      to="/#connect"
+      onClick={() => handleNavLinkClick("/", "connect")}
+      title={!token ? "Please log in to access this page" : ""}
+    >
+      CONNECT WITH US
+    </Link>
+
+    <Link
+      className={`rounded-xl px-5 py-4 border border-white/20 bg-white/5 hover:bg-purple-100/10 hover:text-purple-300 shadow-inner transition-all duration-300 ${
+        isHashLinkActive("about") ? "active" : ""
+      }`}
+      to="/#about"
+      onClick={() => handleNavLinkClick("/", "about")}
+    >
+      ABOUT
+    </Link>
+
+    {/* Conditional Login/Logout */}
+    {token ? (
+      <button
+        onClick={() => {
+          handleLogout();
+          setVisible(false);
+        }}
+        className="rounded-xl px-5 py-4 border border-white/20 bg-white/5 hover:bg-purple-100/10 hover:text-purple-300 shadow-inner transition-all duration-300 text-left"
       >
-        <div className="flex flex-col text-white font-semibold tracking-wide text-lg space-y-4">
-          <div
-            onClick={() => setVisible(false)}
-            className="flex items-center gap-3 cursor-pointer text-purple-200 hover:text-white hover:scale-105 hover:animate-pulse transition-all duration-300"
-          >
-            <img src={assets.dropdown} className="h-4 rotate-180" alt="" />
-            <p>Back</p>
-          </div>
-          <Link
-            className={`py-3 pl-6 border-b border-white/20 hover:bg-purple-100/10 hover:text-purple-300 transition-all duration-300 ${
-              isHashLinkActive("home") ||
-              (location.pathname === "/" && location.hash === "")
-                ? "active"
-                : ""
-            }`}
-            to="/"
-            onClick={() => handleNavLinkClick("/", "home")}
-          >
-            HOME
-          </Link>
-          <Link
-            className={`py-3 pl-6 border-b border-white/20 hover:bg-purple-100/10 hover:text-purple-300 transition-all duration-300 ${
-              isHashLinkActive("services") ? "active" : ""
-            }`}
-            to="/#services"
-            onClick={() => handleNavLinkClick("/", "services")}
-          >
-            SERVICES
-          </Link>
-          <Link
-            className={`py-3 pl-6 border-b border-white/20 hover:bg-purple-100/10 hover:text-purple-300 transition-all duration-300 ${
-              isHashLinkActive("packages") ? "active" : ""
-            }`}
-            to="/#packages"
-            onClick={() => handleNavLinkClick("/", "packages")}
-          >
-            PACKAGES
-          </Link>
-          <Link
-            className={`py-3 pl-6 border-b border-white/20 hover:bg-purple-100/10 hover:text-purple-300 transition-all duration-300 ${
-              !token ? "pointer-events-none opacity-50" : ""
-            } ${isHashLinkActive("connect") ? "active" : ""}`}
-            to="/#connect"
-            onClick={() => handleNavLinkClick("/", "connect")}
-            title={!token ? "Please log in to access this page" : ""}
-          >
-            CONNECT WITH US
-          </Link>
-          <Link
-            className={`py-3 pl-6 border-b border-white/20 hover:bg-purple-100/10 hover:text-purple-300 transition-all duration-300 ${
-              isHashLinkActive("about") ? "active" : ""
-            }`}
-            to="/#about"
-            onClick={() => handleNavLinkClick("/", "about")}
-          >
-            ABOUT
-          </Link>
-          {/* Conditional Login/Logout in Mobile Sidebar */}
-          {token ? (
-            <button
-              onClick={() => {
-                handleLogout();
-                setVisible(false);
-              }}
-              className="py-3 pl-6 border-b border-white/20 hover:bg-purple-100/10 hover:text-purple-300 transition-all duration-300 text-left"
-            >
-              LOGOUT
-            </button>
-          ) : (
-            <Link
-              className={`py-3 pl-6 border-b border-white/20 hover:bg-purple-100/10 hover:text-purple-300 transition-all duration-300 ${
-                location.pathname === "/login" ? "active" : ""
-              }`}
-              to="/login"
-              onClick={() => setVisible(false)}
-            >
-              LOGIN
-            </Link>
-          )}
-        </div>
-      </div>
+        LOGOUT
+      </button>
+    ) : (
+      <Link
+        className={`rounded-xl px-5 py-4 border border-white/20 bg-white/5 hover:bg-purple-100/10 hover:text-purple-300 shadow-inner transition-all duration-300 ${
+          location.pathname === "/login" ? "active" : ""
+        }`}
+        to="/login"
+        onClick={() => setVisible(false)}
+      >
+        LOGIN
+      </Link>
+    )}
+  </div>
+</div>
+
     </div>
   );
 };
