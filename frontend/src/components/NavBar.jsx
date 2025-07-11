@@ -122,7 +122,7 @@ const NavBar = () => {
         <Link
           to="/#products"
           className={`relative group transition-all duration-300 hover:scale-105 active:scale-95 px-2 ${
-            isHashLinkActive("services") ? "active" : ""
+            isHashLinkActive("products") ? "active" : ""
           }`}
           onClick={() => handleNavLinkClick("/", "services")}
         >
