@@ -103,7 +103,7 @@ const OrbCard = ({ index, activeIndex, setActiveIndex, service }) => {
       {service.description}
     </p>
   </div>
-)}
+
 
       )}
     </div>
