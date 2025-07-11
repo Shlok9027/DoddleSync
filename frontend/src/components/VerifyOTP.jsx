@@ -66,7 +66,8 @@ const VerifyEmail = () => {
       return;
     }
 
-    const url = import.meta.env.VITE_BACKEND_URL; // <-- Corrected
+    // const url = import.meta.env.VITE_BACKEND_URL; // <-- Corrected
+        const url = "https://doddlesync-backend.onrender.com";
     try {
       const { data } = await axios.post(`${url}/api/user/verify-otp`, { userId, otp: fullOtp });
       if (data.success) {
