@@ -1,13 +1,12 @@
 import React, { useContext, useState } from "react";
-import { Link, NavLink, useLocation } from "react-router-dom"; // Keep NavLink for direct routes
+import { Link, NavLink, useLocation } from "react-router-dom";
 import { ShopContext } from "../context/ShopContext.jsx";
 import { toast } from "react-toastify";
 import { scroller } from "react-scroll";
-import { assets } from "../assets/assets.js"; // Make sure assets is imported
+import { assets } from "../assets/assets.js";
 
 const NavBar = () => {
   const [visible, setVisible] = useState(false);
-  // Destructure BACKEND_URL from ShopContext
   const { navigate, token, logout, BACKEND_URL } = useContext(ShopContext);
   const location = useLocation();
 
@@ -18,14 +17,11 @@ const NavBar = () => {
     }
 
     try {
-      const res = await fetch(
-        `${BACKEND_URL}/api/user/me`, // <-- Changed to use BACKEND_URL from context
-        {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
-          },
-        }
-      );
+      const res = await fetch(`${BACKEND_URL}/api/user/me`, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      });
       const data = await res.json();
 
       if (data.success && data.user) {
@@ -38,16 +34,12 @@ const NavBar = () => {
           navigate("/");
         }
       } else {
-        toast.error(
-          data.message || "Failed to fetch user."
-        );
+        toast.error(data.message || "Failed to fetch user.");
         logout();
       }
     } catch (error) {
       console.error("Error checking profile", error);
-      toast.error(
-        "This feature is exclusively available to clients."
-      );
+      toast.error("This feature is exclusively available to clients.");
       navigate("/");
     }
   };
@@ -60,13 +52,30 @@ const NavBar = () => {
     return location.pathname === "/" && location.hash === `#${hashTarget}`;
   };
 
-  const handleNavLinkClick = (path, hashTarget = "") => {
-    setVisible(false); // Close mobile sidebar
+  const handleNavLinkClick = async (path, hashTarget = "") => {
+    setVisible(false);
 
-    if (hashTarget) {
-      navigate(`/#${hashTarget}`);
+    if (location.pathname !== path) {
+      await navigate(path);
+      setTimeout(() => {
+        if (hashTarget) {
+          scroller.scrollTo(hashTarget, {
+            duration: 800,
+            delay: 0,
+            smooth: "easeInOutQuart",
+            offset: -100,
+          });
+        }
+      }, 100);
     } else {
-      navigate(path);
+      if (hashTarget) {
+        scroller.scrollTo(hashTarget, {
+          duration: 800,
+          delay: 0,
+          smooth: "easeInOutQuart",
+          offset: -100,
+        });
+      }
     }
   };
 
@@ -85,12 +94,9 @@ const NavBar = () => {
         </div>
       </Link>
 
-      {/* Navigation Links (Centered in Navbar) */}
-      <ul
-        className="hidden lg:flex items-center gap-8 px-10 py-3 absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2
+      <ul className="hidden lg:flex items-center gap-8 px-10 py-3 absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2
         text-sm sm:text-base font-medium text-white bg-white/10 border border-purple-300/30 backdrop-blur-md rounded-full shadow-xl transition-all duration-500"
       >
-        {/* HOME NavLink (Direct Route or Default Hash) */}
         <NavLink
           to="/"
           className={({ isActive }) =>
@@ -110,17 +116,15 @@ const NavBar = () => {
           <p className="group-hover:text-purple-700 mb-3 sm:flex tracking-wide transition-all duration-300 ease-in-out">
             HOME
           </p>
-          {/* span for the underline. CSS will control its width. */}
           <span className="nav-line absolute -bottom-1 left-1/2 h-[2px] bg-purple-700 rounded-full transition-all duration-500 ease-out transform -translate-x-1/2"></span>
         </NavLink>
 
-        {/* SERVICES Link (Goes to Home page, then scrolls) */}
         <Link
-          to="/products" // The actual target URL for browser navigation/history
+          to="/products"
           className={`relative group transition-all duration-300 hover:scale-105 active:scale-95 px-2 ${
             isHashLinkActive("services") ? "active" : ""
           }`}
-          onClick={() => handleNavLinkClick("/services", "services")} // Triggers navigation/scroll logic
+          onClick={() => handleNavLinkClick("/", "services")}
         >
           <p className="group-hover:text-purple-700 mb-3 sm:flex tracking-wide transition-all duration-300 ease-in-out">
             SERVICES
@@ -128,7 +132,6 @@ const NavBar = () => {
           <span className="nav-line absolute -bottom-1 left-1/2 h-[2px] bg-purple-700 rounded-full transition-all duration-500 ease-in-out transform -translate-x-1/2"></span>
         </Link>
 
-        {/* PACKAGES Link (Goes to Home page, then scrolls) */}
         <Link
           to="/#packages"
           className={`relative group transition-all duration-300 hover:scale-105 active:scale-95 px-2 ${
@@ -142,7 +145,6 @@ const NavBar = () => {
           <span className="nav-line absolute -bottom-1 left-1/2 h-[2px] bg-purple-700 rounded-full transition-all duration-500 ease-in-out transform -translate-x-1/2"></span>
         </Link>
 
-        {/* CONNECT WITH US Link (Goes to Home page, then scrolls) */}
         <Link
           to="/#connect"
           className={`relative group transition-all duration-300 hover:scale-105 active:scale-95 px-2 ${
@@ -160,7 +162,6 @@ const NavBar = () => {
           <span className="nav-line absolute -bottom-1 left-1/2 h-[2px] bg-purple-700 rounded-full transition-all duration-500 ease-out transform -translate-x-1/2"></span>
         </Link>
 
-        {/* ABOUT Link (Goes to Home page, then scrolls) */}
         <Link
           to="/#about"
           className={`relative group transition-all duration-300 hover:scale-105 active:scale-95 px-2 ${
@@ -175,21 +176,13 @@ const NavBar = () => {
         </Link>
       </ul>
 
-      {/* Icons Section (Right Side) */}
       <div className="relative flex flex-col sm:flex-row sm:items-center items-end fixed sm:static right-3 top-18 sm:top-auto transform sm:transform-none -translate-y-1/2 sm:translate-y-0 z-50 gap-3 sm:gap-4">
-        {/* Chat Icon with Conditional Lock Overlay */}
         <div
           className="relative group w-10 h-10 sm:w-10 sm:h-10 bg-white/20 backdrop-blur-md rounded-full shadow-xl border-2 border-purple-300 overflow-hidden hover:scale-110 hover:shadow-purple-400 transition-all duration-500 ease-in-out cursor-pointer"
           onClick={handleProfileClick}
           aria-label={token ? "Go to Chat" : "Log in"}
         >
-          <img
-            src={assets.chat}
-            alt="Chat"
-            className="w-full h-full object-cover"
-          />
-
-          {/* Lock overlay */}
+          <img src={assets.chat} alt="Chat" className="w-full h-full object-cover" />
           <img
             src={assets.lock}
             alt="Locked"
@@ -197,7 +190,6 @@ const NavBar = () => {
           />
         </div>
 
-        {/* Menu Icon (Only visible when navbar <ul> is hidden) */}
         <img
           onClick={() => setVisible(true)}
           src={assets.menu}
@@ -206,7 +198,6 @@ const NavBar = () => {
           aria-label="Open Menu"
         />
 
-        {/* Conditional Login/Logout Button */}
         {token ? (
           <button
             onClick={handleLogout}
@@ -225,104 +216,35 @@ const NavBar = () => {
       </div>
 
       {/* Mobile Sidebar */}
- {/* Mobile Sidebar */}
-<div
-  className={`fixed top-0 right-0 bottom-0 bg-white/10 backdrop-blur-3xl border-l border-purple-200 shadow-[0_8px_40px_rgba(147,51,234,0.3)] transition-all duration-700 ease-in-out lg:hidden overflow-y-auto ${
-    visible ? "w-[85%] px-8 py-10" : "w-0 px-0 py-0"
-  } rounded-l-3xl z-40`}
->
-  <div className="flex flex-col text-white font-semibold tracking-wide text-xl space-y-6">
-    <div
-      onClick={() => setVisible(false)}
-      className="flex items-center gap-4 cursor-pointer text-purple-200 hover:text-white hover:scale-105 hover:animate-pulse transition-all duration-300"
-    >
-      <img
-        src={assets.dropdown}
-        className="h-5 rotate-180 filter drop-shadow-md"
-        alt="Back"
-      />
-      <p className="text-lg font-bold">Back</p>
-    </div>
-
-    <Link
-      className={`rounded-xl px-5 py-4 border border-white/20 bg-white/5 hover:bg-purple-100/10 hover:text-purple-300 shadow-inner transition-all duration-300 ${
-        isHashLinkActive("home") ||
-        (location.pathname === "/" && location.hash === "")
-          ? "active"
-          : ""
-      }`}
-      to="/"
-      onClick={() => handleNavLinkClick("/", "home")}
-    >
-      HOME
-    </Link>
-
-    <Link
-      className={`rounded-xl px-5 py-4 border border-white/20 bg-white/5 hover:bg-purple-100/10 hover:text-purple-300 shadow-inner transition-all duration-300 ${
-        isHashLinkActive("services") ? "active" : ""
-      }`}
-      to="/#services"
-      onClick={() => handleNavLinkClick("/", "services")}
-    >
-      SERVICES
-    </Link>
-
-    <Link
-      className={`rounded-xl px-5 py-4 border border-white/20 bg-white/5 hover:bg-purple-100/10 hover:text-purple-300 shadow-inner transition-all duration-300 ${
-        isHashLinkActive("packages") ? "active" : ""
-      }`}
-      to="/#packages"
-      onClick={() => handleNavLinkClick("/", "packages")}
-    >
-      PACKAGES
-    </Link>
-
-    <Link
-      className={`rounded-xl px-5 py-4 border border-white/20 bg-white/5 hover:bg-purple-100/10 hover:text-purple-300 shadow-inner transition-all duration-300 ${
-        !token ? "pointer-events-none opacity-50" : ""
-      } ${isHashLinkActive("connect") ? "active" : ""}`}
-      to="/#connect"
-      onClick={() => handleNavLinkClick("/", "connect")}
-      title={!token ? "Please log in to access this page" : ""}
-    >
-      CONNECT WITH US
-    </Link>
-
-    <Link
-      className={`rounded-xl px-5 py-4 border border-white/20 bg-white/5 hover:bg-purple-100/10 hover:text-purple-300 shadow-inner transition-all duration-300 ${
-        isHashLinkActive("about") ? "active" : ""
-      }`}
-      to="/#about"
-      onClick={() => handleNavLinkClick("/", "about")}
-    >
-      ABOUT
-    </Link>
-
-    {/* Conditional Login/Logout */}
-    {token ? (
-      <button
-        onClick={() => {
-          handleLogout();
-          setVisible(false);
-        }}
-        className="rounded-xl px-5 py-4 border border-white/20 bg-white/5 hover:bg-purple-100/10 hover:text-purple-300 shadow-inner transition-all duration-300 text-left"
+      <div
+        className={`fixed top-0 right-0 bottom-0 bg-white/10 backdrop-blur-3xl border-l border-purple-200 shadow-[0_8px_40px_rgba(147,51,234,0.3)] transition-all duration-700 ease-in-out lg:hidden overflow-y-auto ${
+          visible ? "w-[85%] px-8 py-10" : "w-0 px-0 py-0"
+        } rounded-l-3xl z-40`}
       >
-        LOGOUT
-      </button>
-    ) : (
-      <Link
-        className={`rounded-xl px-5 py-4 border border-white/20 bg-white/5 hover:bg-purple-100/10 hover:text-purple-300 shadow-inner transition-all duration-300 ${
-          location.pathname === "/login" ? "active" : ""
-        }`}
-        to="/login"
-        onClick={() => setVisible(false)}
-      >
-        LOGIN
-      </Link>
-    )}
-  </div>
-</div>
+        <div className="flex flex-col text-white font-semibold tracking-wide text-xl space-y-6">
+          <div
+            onClick={() => setVisible(false)}
+            className="flex items-center gap-4 cursor-pointer text-purple-200 hover:text-white hover:scale-105 hover:animate-pulse transition-all duration-300"
+          >
+            <img src={assets.dropdown} className="h-5 rotate-180 filter drop-shadow-md" alt="Back" />
+            <p className="text-lg font-bold">Back</p>
+          </div>
 
+          <Link to="/" onClick={() => handleNavLinkClick("/", "home")}>HOME</Link>
+          <Link to="/#products" onClick={() => handleNavLinkClick("/", "products")}>SERVICES</Link>
+          <Link to="/#packages" onClick={() => handleNavLinkClick("/", "packages")}>PACKAGES</Link>
+          <Link to="/#connect" onClick={() => handleNavLinkClick("/", "connect")}>CONNECT WITH US</Link>
+          <Link to="/#about" onClick={() => handleNavLinkClick("/", "about")}>ABOUT</Link>
+
+          {token ? (
+            <button onClick={() => { handleLogout(); setVisible(false); }}>
+              LOGOUT
+            </button>
+          ) : (
+            <Link to="/login" onClick={() => setVisible(false)}>LOGIN</Link>
+          )}
+        </div>
+      </div>
     </div>
   );
 };
