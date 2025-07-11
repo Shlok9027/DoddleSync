@@ -38,7 +38,7 @@ const Home = () => {
       <Element name="about">
         <About />
       </Element>
-{/*             <ScrollIndicator /> */}
+            <ScrollIndicator />
 
             <FAQ />
 
