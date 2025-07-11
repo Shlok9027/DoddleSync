@@ -95,11 +95,16 @@ const OrbCard = ({ index, activeIndex, setActiveIndex, service }) => {
       </div>
 
       {/* ✅ Mobile View Popup */}
-      {activeIndex === index && (
-        <div className="absolute top-[calc(100%+1rem)] left-1/2 -translate-x-1/2 w-[95vw] sm:hidden bg-black/80 text-white p-4 rounded-xl shadow-2xl border border-purple-500 z-20 animate-pop-in space-y-2">
-          <h3 className="text-base font-bold text-purple-300">{service.title}</h3>
-          <p className="text-sm leading-relaxed tracking-wide text-gray-100">{service.description}</p>
-        </div>
+   {/* ✅ Mobile View Popup */}
+{activeIndex === index && (
+  <div className="absolute top-[calc(100%+1rem)] left-1/2 transform -translate-x-1/2 w-[90%] max-w-xs sm:hidden bg-black/90 text-white px-5 py-4 rounded-xl shadow-2xl border border-purple-400 z-20 animate-pop-in space-y-2">
+    <h3 className="text-base font-bold text-purple-300 break-words">{service.title}</h3>
+    <p className="text-sm leading-relaxed tracking-wide text-gray-100 break-words">
+      {service.description}
+    </p>
+  </div>
+)}
+
       )}
     </div>
   );
