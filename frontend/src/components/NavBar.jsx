@@ -154,10 +154,10 @@ const NavBar = () => {
           title={!token ? "Please log in to access this page" : ""}
         >
           <p className="group-hover:text-purple-700 sm:flex tracking-wide transition-all duration-300 ease-in-out font-semibold">
-            CONNECT WITH
+            CONNECT WITH US
           </p>
           <p className="ml-7 group-hover:text-purple-700 sm:flex tracking-widest transition-all duration-300 ease-in-out font-mono">
-            US
+            
           </p>
           <span className="nav-line absolute -bottom-1 left-1/2 h-[2px] bg-purple-700 rounded-full transition-all duration-500 ease-out transform -translate-x-1/2"></span>
         </Link>
