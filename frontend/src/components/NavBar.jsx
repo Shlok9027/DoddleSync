@@ -116,11 +116,11 @@ const NavBar = () => {
 
         {/* SERVICES Link (Goes to Home page, then scrolls) */}
         <Link
-          to="/#services" // The actual target URL for browser navigation/history
+          to="/services" // The actual target URL for browser navigation/history
           className={`relative group transition-all duration-300 hover:scale-105 active:scale-95 px-2 ${
             isHashLinkActive("services") ? "active" : ""
           }`}
-          onClick={() => handleNavLinkClick("/", "services")} // Triggers navigation/scroll logic
+          onClick={() => handleNavLinkClick("/services", "services")} // Triggers navigation/scroll logic
         >
           <p className="group-hover:text-purple-700 mb-3 sm:flex tracking-wide transition-all duration-300 ease-in-out">
             SERVICES
