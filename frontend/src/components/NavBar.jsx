@@ -120,7 +120,7 @@ const NavBar = () => {
         </NavLink>
 
         <Link
-          to="/products"
+          to="/#products"
           className={`relative group transition-all duration-300 hover:scale-105 active:scale-95 px-2 ${
             isHashLinkActive("services") ? "active" : ""
           }`}
@@ -156,7 +156,7 @@ const NavBar = () => {
           <p className="group-hover:text-purple-700 sm:flex tracking-wide transition-all duration-300 ease-in-out font-semibold">
             CONNECT WITH
           </p>
-          <p className="ml-12 group-hover:text-purple-700 sm:flex tracking-widest transition-all duration-300 ease-in-out font-mono">
+          <p className="ml-7 group-hover:text-purple-700 sm:flex tracking-widest transition-all duration-300 ease-in-out font-mono">
             US
           </p>
           <span className="nav-line absolute -bottom-1 left-1/2 h-[2px] bg-purple-700 rounded-full transition-all duration-500 ease-out transform -translate-x-1/2"></span>
