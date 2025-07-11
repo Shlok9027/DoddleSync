@@ -116,7 +116,7 @@ const NavBar = () => {
 
         {/* SERVICES Link (Goes to Home page, then scrolls) */}
         <Link
-          to="/services" // The actual target URL for browser navigation/history
+          to="/products" // The actual target URL for browser navigation/history
           className={`relative group transition-all duration-300 hover:scale-105 active:scale-95 px-2 ${
             isHashLinkActive("services") ? "active" : ""
           }`}
