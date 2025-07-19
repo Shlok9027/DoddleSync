@@ -41,7 +41,7 @@ const Login = () => {
         });
 
         if (response.data.success) {
-          toast.success("OTP sent to your email. Please verify your account.");
+          toast.success("OTP sent to your email, Please Check Spam Folder. Please verify your account.");
           navigate("/verify-otp", {
             state: { userId: response.data.userId },
           });
