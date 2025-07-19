@@ -1,0 +1,670 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&family=Poppins:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Prata&display=swap');
+
+
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&family=Outfit:wght@100..900&family=Poppins:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Prata&family=Rubik+Gemstones&display=swap');
+
+
+
+@import "tailwindcss";
+
+
+a.active span.nav-line {
+  width: 75% !important;
+  display: block;
+  transition: width 0.5s ease;
+}
+
+a:not(.active) span.nav-line {
+  width: 0 !important;
+}
+/* For text animation in OurProjects.jsx */
+.fade-enter {
+  opacity: 0.01;
+  transform: translateY(10px);
+}
+.fade-enter-active {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 300ms ease-in, transform 300ms ease-in;
+}
+.fade-exit {
+  opacity: 1;
+  transform: translateY(0);
+}
+.fade-exit-active {
+  opacity: 0.01;
+  transform: translateY(-10px);
+  transition: opacity 300ms ease-out, transform 300ms ease-out;
+}
+@keyframes glow-pulse {
+  0% {
+    box-shadow: 0 0 0 rgba(255, 255, 255, 0.1);
+  }
+  50% {
+    box-shadow: 0 0 30px rgba(198, 209, 35, 0.4);
+  }
+  100% {
+    box-shadow: 0 0 0 rgba(255, 255, 255, 0.1);
+  }
+}
+
+.animate-glow-pulse {
+  animation: glow-pulse 3s infinite ease-in-out;
+}
+
+
+/* Custom Keyframes */
+@layer utilities {
+  @keyframes spin-360 {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  @keyframes slide-send {
+    0% {
+      transform: translateX(0);
+    }
+    50% {
+      transform: translateX(8px);
+    }
+    100% {
+      transform: translateX(0);
+    }
+  }
+
+  .animate-spin-360 {
+    animation: spin-360 1.2s linear infinite;
+  }
+
+  .animate-slide-send {
+    animation: slide-send 0.5s ease-in-out forwards;
+  }
+}
+
+
+.prata-regular {
+    font-family: "Prata", serif;
+    font-weight: 400;
+    font-style: normal;
+  }
+  
+
+  ::-webkit-scrollbar{
+    display: none;
+  }
+@layer utilities {
+  .animation-delay-2000 {
+    animation-delay: 2s;
+  }
+  .animation-delay-4000 {
+    animation-delay: 4s;
+  }
+}
+.form-input {
+  @apply w-full p-4 bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 transition-all duration-300;
+  animation: fadeInUp 0.8s ease-out both;
+}
+
+.form-input-glass {
+  @apply w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 placeholder-gray-400 text-white focus:outline-none focus:ring-2 focus:ring-purple-500 focus:bg-white/20 transition duration-300;
+}
+
+
+
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes blob {
+  0%, 100% {
+    transform: translate(0px, 0px) scale(1);
+  }
+  33% {
+    transform: translate(30px, -20px) scale(1.05);
+  }
+  66% {
+    transform: translate(-20px, 20px) scale(0.95);
+  }
+}
+
+.animate-blob {
+  animation: blob 8s infinite;
+}
+
+.animation-delay-2000 {
+  animation-delay: 2s;
+}
+
+.animation-delay-4000 {
+  animation-delay: 4s;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+  
+.rubic-regular {
+    font-family: "Rubik", serif;
+    font-weight: 400;
+    font-style: normal;
+  }
+  
+  
+  ::-webkit-scrollbar{
+    display: none;
+  }
+
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+.perspective-1000 {
+  perspective: 1000px;
+}
+
+.preserve-3d {
+  transform-style: preserve-3d;
+}
+
+/* Custom Animations and Utilities */
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+@layer utilities {
+  @keyframes blob {
+    0%, 100% {
+      transform: translate(0px, 0px) scale(1);
+    }
+    33% {
+      transform: translate(30px, -20px) scale(1.1);
+    }
+    66% {
+      transform: translate(-20px, 20px) scale(0.9);
+    }
+  }
+@keyframes scroll-left {
+  0% {
+    transform: translateX(0%);
+  }
+  50% {
+    transform: translateX(-50%);
+  }
+  100% {
+    transform: translateX(0%);
+  }
+}
+
+.scroll-animation {
+  animation: scroll-left 45s linear infinite;
+}
+
+  @keyframes slide-up-fade {
+    0% {
+      transform: translateY(20px);
+      opacity: 0;
+    }
+    100% {
+      transform: translateY(0px);
+      opacity: 1;
+    }
+  }
+
+  .animate-blob {
+    animation: blob 8s infinite ease-in-out;
+  }
+
+  .animate-pulse-slow {
+    animation: pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+
+  .animate-slide-up-fade {
+    animation: slide-up-fade 1s ease forwards;
+  }
+
+  .delay-100 {
+    animation-delay: 0.1s;
+  }
+
+  .delay-200 {
+    animation-delay: 0.2s;
+  }
+
+  .delay-300 {
+    animation-delay: 0.3s;
+  }
+
+  .delay-400 {
+    animation-delay: 0.4s;
+  }
+
+  .delay-500 {
+    animation-delay: 0.5s;
+  }
+
+  /* Optional: Hide scrollbar on scroll containers */
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+}
+@keyframes shine {
+  0% { transform: translateX(-100%) rotate(-45deg); }
+  100% { transform: translateX(100%) rotate(-45deg); }
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+.perspective-1000 {
+  perspective: 1000px;
+}
+
+.preserve-3d {
+  transform-style: preserve-3d;
+}
+
+.transform-gpu {
+  transform: translate3d(0, 0, 0);
+  backface-visibility: hidden;
+  perspective: 1000px;
+}
+
+.bg-grid-pattern {
+  background-image: linear-gradient(to right, rgba(0,0,0,0.1) 1px, transparent 1px),
+                    linear-gradient(to bottom, rgba(0,0,0,0.1) 1px, transparent 1px);
+  background-size: 20px 20px;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Input Number Styles */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  opacity: 1;
+  height: 24px;
+}
+
+/* Custom Focus Styles */
+.focus-ring {
+  @apply focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2;
+}
+
+/* Loading Shimmer Effect */
+.shimmer {
+  background: linear-gradient(
+    90deg,
+    rgba(255,255,255,0) 0%,
+    rgba(255,255,255,0.2) 50%,
+    rgba(255,255,255,0) 100%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+/* Optional: prevent hover line when already active */
+a.active:hover span.nav-line {
+  width: 75% !important;
+}
+
+@keyframes fade-in {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+@keyframes slide-in-left {
+  from { opacity: 0; transform: translateX(-50px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+.animate-fade-in {
+  animation: fade-in 0.8s ease-out both;
+}
+.animate-slide-in-left {
+  animation: slide-in-left 0.8s ease-out both;
+}
+
+.custom-scroll::-webkit-scrollbar {
+  width: 6px;
+}
+.custom-scroll::-webkit-scrollbar-thumb {
+  background: #c084fc;
+  border-radius: 10px;
+}
+
+@keyframes blob {
+  0%,
+  100% {
+    transform: translate(0px, 0px) scale(1);
+  }
+  33% {
+    transform: translate(30px, -50px) scale(1.05);
+  }
+  66% {
+    transform: translate(-20px, 20px) scale(0.95);
+  }
+}
+
+
+.animate-blob {
+  animation: blob 8s infinite;
+}
+.animation-delay-2000 {
+  animation-delay: 2s;
+}
+.animation-delay-4000 {
+  animation-delay: 4s;
+}
+@keyframes fade-in-down {
+  0% {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+/* Fades in content while moving it up */
+@keyframes fade-in-up {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Fades in content while un-blurring it */
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+    filter: blur(5px);
+  }
+  100% {
+    opacity: 1;
+    filter: blur(0);
+  }
+}
+
+/* Creates a dynamic, roaming, and fluid gradient for backgrounds */
+@keyframes magical-roam {
+  0% {
+    background-position: 0% 50%;
+    background-size: 200% 200%;
+  }
+  25% {
+    background-position: 100% 25%;
+    background-size: 250% 250%;
+  }
+  50% {
+    background-position: 25% 100%;
+    background-size: 200% 200%;
+  }
+  75% {
+    background-position: 0% 0%;
+    background-size: 250% 250%;
+  }
+  100% {
+    background-position: 0% 50%;
+    background-size: 200% 200%;
+  }
+}
+
+/* Creates an elegant shimmer effect that sweeps across text */
+@keyframes text-shimmer {
+  from {
+    background-position: 200% 0;
+  }
+  to {
+    background-position: -200% 0;
+  }
+}
+
+/* This is the standard Tailwind 'pulse' keyframe.
+  We define it here so we can create a custom-speed version.
+*/
+@keyframes pulse {
+  50% {
+    opacity: 0.5;
+  }
+}
+
+
+/*
+  ==========================================================================
+  CUSTOM ANIMATION UTILITY CLASSES
+  ==========================================================================
+*/
+
+.animate-fade-in-down {
+  animation: fade-in-down 0.8s ease-out forwards;
+}
+
+.animate-fade-in-up {
+  animation: fade-in-up 0.8s ease-out forwards;
+}
+
+.animate-fade-in {
+  animation: fade-in 0.8s ease-out forwards;
+}
+
+/* Note: For this animation to work correctly, the target element needs 
+  a gradient background defined (e.g., using Tailwind's `bg-gradient-*` classes).
+  The animation fluidly changes the background's position and size.
+*/
+.animate-magical-roam {
+  animation: magical-roam 25s ease-in-out infinite;
+}
+
+.animate-text-shimmer {
+  animation: text-shimmer 4s ease-out infinite alternate;
+}
+
+.animate-pulse-slow {
+  animation: pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 0.2;
+  }
+}
+
+@keyframes spin-slow {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 0.15;
+  }
+}
+
+@keyframes flash {
+  0%, 100% {
+    opacity: 0;
+  }
+  25%, 75% {
+    opacity: 0.2;
+  }
+}
+
+@keyframes bounce-in {
+  0% {
+    transform: scale(0.3);
+    opacity: 0;
+  }
+  50% {
+    transform: scale(1.1);
+    opacity: 1;
+  }
+  70% {
+    transform: scale(0.9);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes shake {
+  0%, 100% {
+    transform: translateX(0);
+  }
+  20%, 60% {
+    transform: translateX(-5px);
+  }
+  40%, 80% {
+    transform: translateX(5px);
+  }
+}
+
+@keyframes pop-in {
+  0% {
+    transform: scale(0.5);
+    opacity: 0;
+  }
+  80% {
+    transform: scale(1.1);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes wobble {
+  0%, 100% {
+    transform: translateX(0);
+  }
+  15% {
+    transform: translateX(-25%) rotate(-5deg);
+  }
+  30% {
+    transform: translateX(20%) rotate(3deg);
+  }
+  45% {
+    transform: translateX(-15%) rotate(-3deg);
+  }
+  60% {
+    transform: translateX(10%) rotate(2deg);
+  }
+  75% {
+    transform: translateX(-5%) rotate(-1deg);
+  }
+}
+
+/* Apply these animations using Tailwind CSS classes */
+.animate-pulse {
+  animation: pulse 2s infinite ease-in-out;
+}
+
+.animate-spin-slow {
+  animation: spin-slow 10s linear infinite;
+}
+
+.animate-fade-in {
+  animation: fade-in 1s forwards;
+}
+
+.animate-flash {
+  animation: flash 1s infinite step-end;
+}
+
+.animate-bounce-in {
+  animation: bounce-in 0.6s forwards;
+}
+
+.animate-shake {
+  animation: shake 0.5s forwards;
+}
+
+.animate-pop-in {
+  animation: pop-in 0.5s forwards;
+}
+
+.animate-wobble {
+  animation: wobble 0.8s ease-in-out forwards;
+}
+
+
