@@ -158,7 +158,7 @@ const NavBar = () => {
           <p className="group-hover:text-purple-700 sm:flex tracking-wide transition-all duration-300 ease-in-out font-semibold">
             CONNECT WITH
           </p>
-          <p className="ml-12 group-hover:text-purple-700 sm:flex tracking-widest transition-all duration-300 ease-in-out font-mono">
+          <p className="group-hover:text-purple-700 sm:flex tracking-widest transition-all duration-300 ease-in-out font-mono">
             US
           </p>
           <span className="nav-line absolute -bottom-1 left-1/2 h-[2px] bg-purple-700 rounded-full transition-all duration-500 ease-out transform -translate-x-1/2"></span>
